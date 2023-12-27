@@ -53,7 +53,7 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 		return
 
 	var now = Time.get_datetime_dict_from_system(true)
-	var msg = {
+	var msg : Dictionary = {
 		"log": {
 			"level": LogLevel.keys()[log_level],
 			"message": message,
