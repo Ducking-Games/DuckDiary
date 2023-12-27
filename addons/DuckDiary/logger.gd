@@ -70,7 +70,7 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 			"level": LogLevel.keys()[log_level],
 			"message": message,
 			"prefix": _prefix,
-			"time": "{day}/{month}/{year} {hour}:{minute}:{second}".format(now)
+			"time": "{year}-{month}-{day}T{hour}:{minute}:{second}Z".format(now)
 		}
 	}
 	
