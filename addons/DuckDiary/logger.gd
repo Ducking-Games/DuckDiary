@@ -33,11 +33,7 @@ func _rotate_logs():
 	if !dir.dir_exists("logs"):
 		dir.make_dir("logs")
 	
-	var log_file = FileAccess.open(log_path, FileAccess.READ)
-	print(log_file.file_exists())
-
-	
-	
+	print(FileAccess.file_exists(log_path))	
 	
 func _set_loglevel(level:String):
 	logger("setting log level",{"level":level},LogLevel.INFO)
