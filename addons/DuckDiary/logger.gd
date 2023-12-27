@@ -69,10 +69,12 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 		"log": {
 			"level": LogLevel.keys()[log_level],
 			"message": message,
-			"prefix": _prefix,
 			"time": "{year}-{month}-{day}T{hour}:{minute}:{second}Z".format(now)
 		}
 	}
+
+		if _prefix:
+		msg.prefix = _prefix
 	
 	match typeof(values):
 		TYPE_ARRAY:
