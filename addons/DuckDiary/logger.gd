@@ -16,7 +16,8 @@ enum LogLevel {
 var CURRENT_LOG_LEVEL=LogLevel.INFO
 var write_logs:bool = false
 var rotate_logs: bool = true
-var log_path:String = "res://logs/game.log"
+var log_path:String = "user://logs/game.log"
+var log_path_old:String = "user://logs/game_old.log"
 var _config
 
 var _prefix=""
@@ -33,7 +34,9 @@ func _rotate_logs():
 	if !dir.dir_exists("logs"):
 		dir.make_dir("logs")
 	
-	print(FileAccess.file_exists(log_path))	
+	if dir.file_exists(log_path):
+		DirAccess.copy(log_path)
+		DirAccess.remove(log_path)
 	
 func _set_loglevel(level:String):
 	logger("setting log level",{"level":level},LogLevel.INFO)
