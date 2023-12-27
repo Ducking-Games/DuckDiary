@@ -1,5 +1,6 @@
-# GodotLogger
-JSON-formatted logger
+# Duck Diary
+JSON-formatted logger 
+Forked from -> Godot Logger: https://github.com/DawnGroveStudios/GodotLogger
 
 # Settings
 
@@ -10,12 +11,17 @@ var log_path:String = "res://game.log"
 ```
 
 # Singletons
-`GodotLogger`
-- `GodotLogger.debug(msg,data)`
-- `GodotLogger.info(msg,data)`
-- `GodotLogger.warn(msg,data)`
-- `GodotLogger.error(msg,data)`
-- `GodotLogger.fatal(msg,data)`
+`DuckDiary`
+- `DuckDiary.debug(msg,data)`
+- `DuckDiary.info(msg,data)`
+- `DuckDiary.warn(msg,data)`
+- `DuckDiary.error(msg,data)`
+- `DuckDiary.fatal(msg,data)`
+
+## Additions to original
+* All logging is JSON
+* Logging message included within JSON
+* Log file rotation (One previous and one current log file)
 
 # Classes
 ## Log

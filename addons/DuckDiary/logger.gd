@@ -15,7 +15,8 @@ enum LogLevel {
 
 var CURRENT_LOG_LEVEL=LogLevel.INFO
 var write_logs:bool = false
-var log_path:String = "res://game.log"
+var rotate_logs: bool = true
+var log_path:String = "res://logs/game.log"
 var _config
 
 var _prefix=""
@@ -25,6 +26,18 @@ var _file
 
 func _ready():
 	_set_loglevel(Config.get_var("log-level","debug"))
+	_rotate_logs()
+
+func _rotate_logs():
+	var dir = DirAccess.open("user://")
+	if !dir.dir_exists("logs"):
+		dir.make_dir("logs")
+	
+	var log_file = FileAccess.open(log_path, FileAccess.READ)
+	print(log_file.file_exists())
+
+	
+	
 	
 func _set_loglevel(level:String):
 	logger("setting log level",{"level":level},LogLevel.INFO)
