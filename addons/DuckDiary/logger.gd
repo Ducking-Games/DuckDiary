@@ -15,7 +15,9 @@ enum LogLevel {
 
 var CURRENT_LOG_LEVEL=LogLevel.INFO
 var write_logs:bool = false
-var log_path:String = "res://game.log"
+var rotate_logs: bool = true
+var log_path:String = "user://logs/game.log"
+var log_path_backup:String = "user://logs/game_old.log"
 var _config
 
 var _prefix=""
@@ -25,6 +27,16 @@ var _file
 
 func _ready():
 	_set_loglevel(Config.get_var("log-level","debug"))
+	_rotate_logs()
+
+func _rotate_logs():
+	var dir = DirAccess.open("user://")
+	if !dir.dir_exists("logs"):
+		dir.make_dir("logs")
+	
+	if dir.file_exists(log_path):
+		dir.copy(log_path, log_path_backup)
+		dir.remove(log_path)
 	
 func _set_loglevel(level:String):
 	logger("setting log level",{"level":level},LogLevel.INFO)
@@ -57,10 +69,12 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 		"log": {
 			"level": LogLevel.keys()[log_level],
 			"message": message,
-			"prefix": _prefix,
-			"time": "{day}/{month}/{year} {hour}:{minute}:{second}".format(now)
+			"time": "{year}-{month}-{day}T{hour}:{minute}:{second}Z".format(now)
 		}
 	}
+
+		if _prefix:
+		msg.prefix = _prefix
 	
 	match typeof(values):
 		TYPE_ARRAY:
