@@ -35,8 +35,8 @@ func _rotate_logs():
 		dir.make_dir("logs")
 	
 	if dir.file_exists(log_path):
-		DirAccess.copy(log_path, log_path_backup)
-		DirAccess.remove(log_path)
+		dir.copy(log_path, log_path_backup)
+		dir.remove(log_path)
 	
 func _set_loglevel(level:String):
 	logger("setting log level",{"level":level},LogLevel.INFO)
