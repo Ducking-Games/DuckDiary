@@ -140,7 +140,12 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 			get_tree().quit()
 		_:
 			print(msg)
-			
+func dump(values={}, log_level=LogLevel.INFO):
+	call_thread_safe("logger", null, values, log_level)
+
+func quack(message:String, values={}):
+	call_thread_safe("logger",message,values,LogLevel.QUACK)
+
 func debug(message:String,values={}):
 	call_thread_safe("logger",message,values,LogLevel.DEBUG)
 
