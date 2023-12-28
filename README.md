@@ -7,11 +7,13 @@ Forked from -> Godot Logger: https://github.com/DawnGroveStudios/GodotLogger
 ```
 var CURRENT_LOG_LEVEL=LogLevel.INFO
 var write_logs:bool = false
-var log_path:String = "res://game.log"
+var log_path:String = "user://logs/game.log"
+var log_path_backup:String = "user://logs/game.log.bak
 ```
 
 # Singletons
 `DuckDiary`
+- `DuckDiary.quack(msg,data)`
 - `DuckDiary.debug(msg,data)`
 - `DuckDiary.info(msg,data)`
 - `DuckDiary.warn(msg,data)`
@@ -22,12 +24,14 @@ var log_path:String = "res://game.log"
 * All logging is JSON
 * Logging message included within JSON
 * Log file rotation (One previous and one current log file)
+* QUACK -> Try it out.. for funsies
 
 # Classes
 ## Log
 Is the class implementation of the singleton logger. The `CURRENT_LOG_LEVEL` can be set to any of the following levels:
 ```
 enum LogLevel {
+	QUACK,
 	DEBUG,
 	INFO,
 	WARN,
