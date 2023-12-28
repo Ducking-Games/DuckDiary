@@ -76,7 +76,7 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 		}
 	}
 
-		if _prefix:
+	if _prefix:
 		msg.prefix = _prefix
 	
 	match typeof(values):
