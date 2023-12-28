@@ -6,6 +6,7 @@ class_name Log
 signal log_message(level:LogLevel,message:String)
 
 enum LogLevel {
+	QUACK,
 	DEBUG,
 	INFO,
 	WARN,
@@ -41,6 +42,8 @@ func _rotate_logs():
 func _set_loglevel(level:String):
 	logger("setting log level",{"level":level},LogLevel.INFO)
 	match level.to_lower():
+		"quack":
+			CURRENT_LOG_LEVEL = LogLevel.QUACK
 		"debug":
 			CURRENT_LOG_LEVEL = LogLevel.DEBUG
 		"info":
@@ -111,6 +114,10 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 	_write_logs(msg)
 	emit_signal("log_message", log_level, msg)
 	match log_level:
+		LogLevel.QUACK:
+			print("QUACK\n\n")
+			print(msg)
+			print("\n\nQUACK")
 		LogLevel.DEBUG:
 			print(msg)
 			print_stack()
