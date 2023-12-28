@@ -2,7 +2,7 @@
 extends EditorPlugin
 
 var loadSingletonPlugin = {
-	"DuckDiary" : "res://addons/DuckDiary/logger.gd",
+	"DDLog" : "res://addons/DuckDiary/logger.gd",
 }
 
 func _enter_tree():

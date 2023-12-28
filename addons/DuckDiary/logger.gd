@@ -6,6 +6,7 @@ class_name Log
 signal log_message(level:LogLevel,message:String)
 
 enum LogLevel {
+	QUACK,
 	DEBUG,
 	INFO,
 	WARN,
@@ -26,7 +27,7 @@ var _default_args={}
 var _file
 
 func _ready():
-	_set_loglevel(Config.get_var("log-level","debug"))
+	_set_loglevel(Config.get_var("log-level","quack"))
 	_rotate_logs()
 
 func _rotate_logs():
@@ -41,6 +42,8 @@ func _rotate_logs():
 func _set_loglevel(level:String):
 	logger("setting log level",{"level":level},LogLevel.INFO)
 	match level.to_lower():
+		"quack":
+			CURRENT_LOG_LEVEL = LogLevel.QUACK
 		"debug":
 			CURRENT_LOG_LEVEL = LogLevel.DEBUG
 		"info":
@@ -73,7 +76,7 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 		}
 	}
 
-		if _prefix:
+	if _prefix:
 		msg.prefix = _prefix
 	
 	match typeof(values):
@@ -111,6 +114,10 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 	_write_logs(msg)
 	emit_signal("log_message", log_level, msg)
 	match log_level:
+		LogLevel.QUACK:
+			print("QUACK\n\n")
+			print(msg)
+			print("\n\nQUACK")
 		LogLevel.DEBUG:
 			print(msg)
 			print_stack()
@@ -133,7 +140,12 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 			get_tree().quit()
 		_:
 			print(msg)
-			
+func dump(values={}, log_level=LogLevel.INFO):
+	call_thread_safe("logger", null, values, log_level)
+
+func quack(message:String, values={}):
+	call_thread_safe("logger",message,values,LogLevel.QUACK)
+
 func debug(message:String,values={}):
 	call_thread_safe("logger",message,values,LogLevel.DEBUG)
 
