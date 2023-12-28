@@ -27,7 +27,7 @@ var _default_args={}
 var _file
 
 func _ready():
-	_set_loglevel(Config.get_var("log-level","debug"))
+	_set_loglevel(Config.get_var("log-level","quack"))
 	_rotate_logs()
 
 func _rotate_logs():
